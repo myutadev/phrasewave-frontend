@@ -1,6 +1,6 @@
 import { Nunito } from 'next/font/google'
 import '@/app/global.css'
-import Header from '@/components/layout/Header'
+import Header from '@/components/layouts/Header'
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
@@ -19,7 +19,9 @@ const RootLayout = ({ children }) => {
 }
 
 export const metadata = {
-    title: 'Laravel',
+    title: 'PhraseWave',
+    description:
+        'PhraseWave is a web application where you can create your own example sentence to learn new words for language learners',
 }
 
 export default RootLayout
