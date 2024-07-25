@@ -6,9 +6,9 @@ import {
     SelectLabel,
     SelectTrigger,
     SelectValue,
+    SelectItem,
 } from '@/components/ui/select'
 import React from 'react'
-import LanguageOption from './LanguageOption'
 
 interface languagesDataProps {
     languagesData: Language[]
@@ -16,20 +16,21 @@ interface languagesDataProps {
 
 const LanguageSelector = async ({ languagesData }: languagesDataProps) => {
     return (
-        <div>
-            <p>Language:</p>
+        <div className="flex items-baseline">
+            <p className="text-base">Language:</p>
             <Select>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] border-none text-custompurple text-base">
                     <SelectValue placeholder="Select a language" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
-                        <SelectLabel>Select Language</SelectLabel>
+                        <SelectLabel>Language</SelectLabel>
                         {languagesData.map(language => (
-                            <LanguageOption
+                            <SelectItem
                                 key={language.language_code}
-                                language={language}
-                            />
+                                value={language.language_code}>
+                                {language.name}
+                            </SelectItem>
                         ))}
                     </SelectGroup>
                 </SelectContent>
