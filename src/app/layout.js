@@ -1,18 +1,21 @@
-import { Nunito } from 'next/font/google'
+import { Nunito, Poppins } from 'next/font/google'
 import '@/app/global.css'
 import Header from '@/components/layouts/Header'
 
-const nunitoFont = Nunito({
+const poppingsFont = Poppins({
     subsets: ['latin'],
     display: 'swap',
+    weight: '400',
 })
 
 const RootLayout = ({ children }) => {
     return (
-        <html lang="en" className={nunitoFont.className}>
+        <html lang="en" className={poppingsFont.className}>
             <body className="antialiased">
-                <Header />
-                {children}
+                <div className='container mx-auto'>
+                    <Header />
+                    {children}
+                </div>
             </body>
         </html>
     )

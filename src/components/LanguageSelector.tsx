@@ -16,11 +16,11 @@ interface languagesDataProps {
 
 const LanguageSelector = async ({ languagesData }: languagesDataProps) => {
     return (
-        <div className="flex items-baseline">
+        <div className="flex items-baseline mb-5">
             <p className="text-base">Language:</p>
             <Select>
-                <SelectTrigger className="w-[180px] border-none text-custompurple text-base">
-                    <SelectValue placeholder="Select a language" />
+                <SelectTrigger className="w-[210px] border-none text-custompurple text-base">
+                    <SelectValue placeholder="Select a Language " />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
