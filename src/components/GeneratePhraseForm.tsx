@@ -8,6 +8,21 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { formSchema } from '@/schemas/wordContextFormSchema'
+import { Language } from '@/types/type'
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+    SelectItem,
+} from '@/components/ui/select'
+import { Item } from '@radix-ui/react-select'
+
+interface languagesDataProps {
+    languagesData: Language[]
+}
 
 interface input {
     id: number
@@ -15,7 +30,7 @@ interface input {
     contextId: string
 }
 
-const WordInputCards = () => {
+const GeneratePhraseForm = ({ languagesData }: languagesDataProps) => {
     const inputs: input[] = [
         { id: 1, wordId: 'word1', contextId: 'context1' },
         { id: 2, wordId: 'word2', contextId: 'context2' },
@@ -27,6 +42,7 @@ const WordInputCards = () => {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
+            language: '',
             word1: '',
             context1: '',
             word2: '',
@@ -50,6 +66,45 @@ const WordInputCards = () => {
         <div>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <div>
+                        <div className="flex items-baseline mb-5">
+                            <p className="text-base">Language:</p>
+                            <FormField
+                                control={form.control}
+                                name="language"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Select onValueChange={field.onChange}>
+                                            <SelectTrigger className="w-[210px] border-none text-custompurple text-base">
+                                                <SelectValue placeholder="CHOOSE LANGUAGE " />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    <SelectLabel>
+                                                        Language
+                                                    </SelectLabel>
+                                                    {languagesData.map(
+                                                        language => (
+                                                            <SelectItem
+                                                                key={
+                                                                    language.language_code
+                                                                }
+                                                                value={
+                                                                    language.language_code
+                                                                }>
+                                                                {language.name}
+                                                            </SelectItem>
+                                                        ),
+                                                    )}
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+                    </div>
                     {inputs.map((item, index) => (
                         <Card className="mt-10" key={item.id}>
                             <CardHeader>
@@ -114,4 +169,4 @@ const WordInputCards = () => {
     )
 }
 
-export default WordInputCards
+export default GeneratePhraseForm

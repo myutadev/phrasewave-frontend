@@ -2,6 +2,7 @@ import LanguageSelector from '@/components/LanguageSelector'
 import { Language } from '@/types/type'
 import React from 'react'
 import WordInputCards from '@/components/WordInputCards'
+import GeneratePhraseForm from '@/components/GeneratePhraseForm'
 
 const getAllLanguageData = async () => {
     const res = await fetch('http://localhost:8000/api/languages', {
@@ -20,8 +21,7 @@ const Generate = async () => {
         <div className="mx-5 my-5">
             <div className="font-semibold text-xl">Ask AI for the phrase!</div>
             <div className="pt-5">
-                <LanguageSelector languagesData={languagesData} />
-                <WordInputCards />
+                <GeneratePhraseForm languagesData={languagesData} />
             </div>
         </div>
     )

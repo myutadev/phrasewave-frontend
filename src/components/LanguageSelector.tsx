@@ -20,7 +20,7 @@ const LanguageSelector = async ({ languagesData }: languagesDataProps) => {
             <p className="text-base">Language:</p>
             <Select>
                 <SelectTrigger className="w-[210px] border-none text-custompurple text-base">
-                    <SelectValue placeholder="Select a Language " />
+                    <SelectValue placeholder="CHOOSE LANGUAGE " />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
