@@ -1,7 +1,5 @@
-import LanguageSelector from '@/components/LanguageSelector'
 import { Language } from '@/types/type'
 import React from 'react'
-import WordInputCards from '@/components/WordInputCards'
 import GeneratePhraseForm from '@/components/GeneratePhraseForm'
 
 const getAllLanguageData = async () => {

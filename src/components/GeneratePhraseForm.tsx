@@ -18,18 +18,24 @@ import {
     SelectValue,
     SelectItem,
 } from '@/components/ui/select'
-import { Item } from '@radix-ui/react-select'
 
 interface languagesDataProps {
     languagesData: Language[]
 }
 
+type wordKeys = 'word1' | 'word2' | 'word3' | 'word4' | 'word5'
+type contextKeys =
+    | 'context1'
+    | 'context2'
+    | 'context3'
+    | 'context4'
+    | 'context5'
+
 interface input {
     id: number
-    wordId: string
-    contextId: string
+    wordId: wordKeys
+    contextId: contextKeys
 }
-
 const GeneratePhraseForm = ({ languagesData }: languagesDataProps) => {
     const inputs: input[] = [
         { id: 1, wordId: 'word1', contextId: 'context1' },
