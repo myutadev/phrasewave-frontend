@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Input } from './ui/input'
 import { Form, FormField, FormItem, FormMessage } from './ui/form'
@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { formSchema } from '@/schemas/wordContextFormSchema'
-import { Language } from '@/types/type'
+import { ApiResponse, Language } from '@/types/type'
 import {
     Select,
     SelectContent,
@@ -18,6 +18,9 @@ import {
     SelectValue,
     SelectItem,
 } from '@/components/ui/select'
+import { getCSRFToken } from '@/lib/csrf'
+import { RiseLoader } from 'react-spinners'
+import GeneratedPhraseCards from './GeneratedPhraseCards'
 
 interface languagesDataProps {
     languagesData: Language[]
@@ -36,6 +39,7 @@ interface input {
     wordId: wordKeys
     contextId: contextKeys
 }
+
 const GeneratePhraseForm = ({ languagesData }: languagesDataProps) => {
     const inputs: input[] = [
         { id: 1, wordId: 'word1', contextId: 'context1' },
@@ -45,7 +49,7 @@ const GeneratePhraseForm = ({ languagesData }: languagesDataProps) => {
         { id: 5, wordId: 'word5', contextId: 'context5' },
     ]
 
-    const form = useForm({
+    const { reset, ...form } = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             language: '',
@@ -62,16 +66,48 @@ const GeneratePhraseForm = ({ languagesData }: languagesDataProps) => {
         },
     })
 
+    const resetForm = () => {
+        reset()
+        setResponse(null)
+    }
+
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [error, setError] = useState<string | null>(null)
+    const [response, setResponse] = useState<ApiResponse[] | null>(null)
+
     const onSubmit = async (value: z.infer<typeof formSchema>) => {
-        console.log(value)
-        const { word1, context1 } = value
-        console.log(word1, context1)
+        try {
+            setIsLoading(true)
+            setError(null)
+            setResponse(null)
+            const csrfToken = await getCSRFToken()
+            const res = await fetch('http://localhost:8000/api/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                },
+                credentials: 'include',
+                body: JSON.stringify(value),
+            })
+
+            if (!res.ok) throw new Error('Network response was not ok')
+
+            const jsonres: ApiResponse[] = await res.json()
+            console.log('jsonres is', jsonres)
+
+            setResponse(jsonres)
+        } catch (error) {
+            setError(error.message || 'An error occured')
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
         <div>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+            <Form {...form} reset={reset}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="mb-3">
                     <div>
                         <div className="flex items-baseline mb-5">
                             <p className="text-base">Language:</p>
@@ -80,7 +116,9 @@ const GeneratePhraseForm = ({ languagesData }: languagesDataProps) => {
                                 name="language"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <Select onValueChange={field.onChange}>
+                                        <Select
+                                            onValueChange={field.onChange}
+                                            value={field.value}>
                                             <SelectTrigger className="w-[210px] border-none text-custompurple text-base">
                                                 <SelectValue placeholder="CHOOSE LANGUAGE " />
                                             </SelectTrigger>
@@ -96,7 +134,7 @@ const GeneratePhraseForm = ({ languagesData }: languagesDataProps) => {
                                                                     language.language_code
                                                                 }
                                                                 value={
-                                                                    language.language_code
+                                                                    language.name
                                                                 }>
                                                                 {language.name}
                                                             </SelectItem>
@@ -114,7 +152,7 @@ const GeneratePhraseForm = ({ languagesData }: languagesDataProps) => {
                     {inputs.map((item, index) => (
                         <Card className="mt-10" key={item.id}>
                             <CardHeader>
-                                <CardTitle className="text-`gray-500">
+                                <CardTitle className="text-gray-500">
                                     {index + 1}
                                 </CardTitle>
                             </CardHeader>
@@ -164,13 +202,29 @@ const GeneratePhraseForm = ({ languagesData }: languagesDataProps) => {
                             </CardContent>
                         </Card>
                     ))}
-                    <Button
-                        type="submit"
-                        className="mt-10 container w-64 flex justify-center">
-                        Generate Your Phrases
-                    </Button>
+                    {!isLoading && !response && (
+                        <Button
+                            type="submit"
+                            className="mt-10 container w-64 flex justify-center">
+                            Generate Your Phrases
+                        </Button>
+                    )}
                 </form>
             </Form>
+            {isLoading && (
+                <div className="my-10 flex justify-center">
+                    <RiseLoader size={10} color="#6B7280" />
+                </div>
+            )}
+            {error && <p>Error:{error}</p>}
+            {response && (
+                <div>
+                    <GeneratedPhraseCards
+                        phrases={response}
+                        resetForm={resetForm}
+                    />
+                </div>
+            )}
         </div>
     )
 }
