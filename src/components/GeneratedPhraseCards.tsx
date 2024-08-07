@@ -1,24 +1,34 @@
 'use client'
 import { ApiResponse } from '@/types/type'
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { splitPhraseByWords } from '@/lib/splitPhraseByWords'
 import { Button } from '@/components/ui/button'
+import { CircleMinus, CirclePlus } from 'lucide-react'
 
 interface PhrasesProps {
     phrases: ApiResponse[]
     resetForm: () => void
 }
 
-const GeneratedPhraseCards = ({
-    phrases,
-    resetForm,
-}: PhrasesProps) => {
+const GeneratedPhraseCards = ({ phrases, resetForm }: PhrasesProps) => {
     const splitPhrases = phrases.map(phraseObj => {
         const { usedWords, generatedPhrase } = phraseObj
         return splitPhraseByWords(usedWords, generatedPhrase)
     })
     console.log('splitPhrases', splitPhrases)
+
+    const [savedPhrases, setSavedPhrases] = useState(
+        new Array(phrases.length).fill(false),
+    )
+
+    const toggleSave = (index: number) => {
+        setSavedPhrases(prev => {
+            const newState = [...prev]
+            newState[index] = !newState[index]
+            return newState
+        })
+    }
 
     return (
         <div className="mt-10">
@@ -36,8 +46,8 @@ const GeneratedPhraseCards = ({
                         </CardHeader>
                         <CardContent>
                             <div className="flex justify-between space-x-8 mb-3">
-                                <div className="grid w-9/12 items-center ">
-                                    <div className="flex">
+                                <div className="grid w-9/12 ">
+                                    <div>
                                         {splitPhrase.map((part, partIndex) =>
                                             phrases[index].usedWords.some(
                                                 word =>
@@ -55,6 +65,28 @@ const GeneratedPhraseCards = ({
                                             ),
                                         )}
                                     </div>
+                                </div>
+                                <div className="grid w-3/12 ">
+                                    <Button
+                                        key={`save-button-${index}`}
+                                        onClick={() => toggleSave(index)}
+                                        variant={
+                                            savedPhrases[index]
+                                                ? 'outline'
+                                                : 'default'
+                                        }>
+                                        {savedPhrases[index] ? (
+                                            <>
+                                                <CircleMinus className="mr-2 h-4 w-4" />
+                                                Remove
+                                            </>
+                                        ) : (
+                                            <>
+                                                <CirclePlus className="mr-2 h-4 w-4" />
+                                                Save
+                                            </>
+                                        )}
+                                    </Button>
                                 </div>
                             </div>
                         </CardContent>
