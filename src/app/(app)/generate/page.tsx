@@ -1,6 +1,7 @@
 import { Language } from '@/types/type'
 import React from 'react'
 import GeneratePhraseForm from '@/components/GeneratePhraseForm'
+import { useAuth } from '@/hooks/auth'
 
 const getAllLanguageData = async () => {
     const res = await fetch('http://localhost:8000/api/languages', {
@@ -12,6 +13,7 @@ const getAllLanguageData = async () => {
 }
 
 const Generate = async () => {
+
     const languagesData: Language[] = await getAllLanguageData()
     console.log(languagesData)
 
@@ -19,7 +21,7 @@ const Generate = async () => {
         <div className="mx-5 my-5">
             <div className="font-semibold text-xl">Ask AI for the phrase!</div>
             <div className="pt-5">
-                <GeneratePhraseForm languagesData={languagesData} />
+                <GeneratePhraseForm languagesData={languagesData}  />
             </div>
         </div>
     )
