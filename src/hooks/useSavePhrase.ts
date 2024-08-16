@@ -9,6 +9,11 @@ interface UseSavePhraseProps {
     index: number
 }
 
+interface SavedIds {
+    wordIds: number[]
+    phraseId: number
+}
+
 export function useSavePhrase({
     user,
     selectedLanguage,
@@ -19,16 +24,33 @@ export function useSavePhrase({
     const [isSaved, setIsSaved] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null)
-    const [savedData, setSavedData] = useState<ApiResponse | null>(null)
+    const [savedData, setSavedData] = useState<SavedIds | null>(null)
 
     const toggleSave = useCallback(async () => {
         setIsLoading(true)
         setError(null)
 
         if (isSaved) {
-            setIsSaved(false)
-            setSavedData(null)
-            return
+            console.log('check before del request', savedData)
+            const delCsrfToken = await getCSRFToken()
+            const delResponse = await fetch(
+                'http://localhost:8000/api/myphrases',
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': delCsrfToken,
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(savedData),
+                },
+            )
+            if (delResponse.ok) {
+                setIsSaved(false)
+                setSavedData(null)
+                console.log('savedData is', savedData)
+                return
+            }
         }
 
         const requestData = {
@@ -54,8 +76,12 @@ export function useSavePhrase({
             )
 
             if (response.ok) {
+                const responseObs = await response.json()
+                const savedIds = responseObs.data
+                console.log('savedIds is ', savedIds)
                 setIsSaved(prev => !prev)
-                setSavedData(phrases[index])
+                setSavedData(savedIds)
+                console.log('savedData is', savedData)
             } else {
                 const errorData = await response.json()
                 throw new Error(errorData.message || 'Failed to save phrase')

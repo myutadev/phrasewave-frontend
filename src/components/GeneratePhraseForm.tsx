@@ -41,7 +41,9 @@ interface input {
     contextId: contextKeys
 }
 
-const GeneratePhraseForm = ({ languagesData }: GeneratePhraseFormProps) => {
+const GeneratePhraseForm = ({
+    languagesData,
+}: GeneratePhraseFormProps) => {
     const inputs: input[] = [
         { id: 1, wordId: 'word1', contextId: 'context1' },
         { id: 2, wordId: 'word2', contextId: 'context2' },
