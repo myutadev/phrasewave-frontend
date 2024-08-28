@@ -1,7 +1,6 @@
 import { Language } from '@/types/type'
 import React from 'react'
 import GeneratePhraseForm from '@/components/GeneratePhraseForm'
-import { useAuth } from '@/hooks/auth'
 
 const getAllLanguageData = async () => {
     const res = await fetch('http://localhost:8000/api/languages', {

@@ -13,3 +13,14 @@ export interface User {
     name: string
     email: string
 }
+
+export interface MyphraseResponseData {
+    [key: string]: {
+        phrases: string[]
+        language: string
+    }
+}
+
+export interface MyphraseResponse {
+    data: MyphraseResponseData[]
+}
