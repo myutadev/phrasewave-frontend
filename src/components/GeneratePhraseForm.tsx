@@ -117,7 +117,7 @@ const GeneratePhraseForm = ({
             <Form {...form} reset={reset}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="mb-3">
                     <div>
-                        <div className="flex items-baseline mb-5">
+                        <div className="flex items-baseline mb-3">
                             <p className="text-base">Language:</p>
                             <FormField
                                 control={form.control}
@@ -161,16 +161,16 @@ const GeneratePhraseForm = ({
                         </div>
                     </div>
                     {inputs.map((item, index) => (
-                        <Card className="mt-10" key={item.id}>
+                        <Card className="mt-3" key={item.id}>
                             <CardHeader>
                                 <CardTitle className="text-gray-500">
                                     {index + 1}
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="flex justify-between space-x-8 mb-3">
+                                <div className="flex justify-between space-x-8 mb-2">
                                     <div className="grid w-4/12 items-center ">
-                                        <div className="flex flex-col space-y-1.5 ">
+                                        <div className="flex flex-col space-y-1 ">
                                             <FormField
                                                 key={item.id}
                                                 control={form.control}
