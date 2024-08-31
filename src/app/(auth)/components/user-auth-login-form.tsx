@@ -17,7 +17,7 @@ export function UserAuthLoginForm() {
 
     const { login } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
+        redirectIfAuthenticated: '/generate',
     })
 
     const [email, setEmail] = useState('')

@@ -14,7 +14,7 @@ import { Label } from '@/components/ui/label'
 export function UserAuthRegistgerForm() {
     const { register } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
+        redirectIfAuthenticated: '/generate',
     })
 
     const [name, setName] = useState('')

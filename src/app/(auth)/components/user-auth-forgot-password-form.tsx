@@ -14,7 +14,7 @@ import { Label } from '@/components/ui/label'
 export function UserAuthForgotPasswordForm() {
     const { forgotPassword } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
+        redirectIfAuthenticated: '/generate',
     })
 
     const [email, setEmail] = useState('')
