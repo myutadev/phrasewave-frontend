@@ -30,7 +30,7 @@ const MyphraseCards = ({ wordPhrases }: MyphraseCardsProps) => {
     const [selectedLanguage, setSelectedLanguage] = useState<string | null>(
         allSavedLanguagesArray[0],
     )
-    const { reset, ...form } = useForm({
+    const { ...form } = useForm({
         defaultValues: {
             language: allSavedLanguagesArray[0],
         },
@@ -94,6 +94,7 @@ const MyphraseCards = ({ wordPhrases }: MyphraseCardsProps) => {
                             phrases={Object.values(wordObj)[0]}
                             index={index}
                             word={Object.keys(wordObj)[0]}
+                            key={index}
                         />
                     ))}
                 </div>

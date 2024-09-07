@@ -36,6 +36,7 @@ const GeneratedPhraseCards = ({
                         selectedLanguage={selectedLanguage}
                         user={user}
                         index={index}
+                        key={index}
                     />
                 ))}
 

@@ -41,9 +41,7 @@ const WordInputCards = () => {
     })
 
     const onSubmit = async (value: z.infer<typeof formSchema>) => {
-        console.log(value)
         const { word1, context1 } = value
-        console.log(word1, context1)
     }
 
     return (
@@ -64,6 +62,7 @@ const WordInputCards = () => {
                                             <FormField
                                                 key={item.id}
                                                 control={form.control}
+                                                // @ts-expect-error: wordId is dynamically generated and doesn't match static types
                                                 name={item.wordId}
                                                 render={({ field }) => (
                                                     <FormItem>
@@ -84,6 +83,7 @@ const WordInputCards = () => {
                                             <FormField
                                                 key={item.id}
                                                 control={form.control}
+                                                // @ts-expect-error: contextId is dynamically generated and doesn't match static types
                                                 name={item.contextId}
                                                 render={({ field }) => (
                                                     <FormItem>

@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import LeftPanel from '../../components/leftPanel'
+import LeftPanel from '../../components/LeftPanel'
 import { UserAuthRegistgerForm } from '../../components/user-auth-register-form'
 
 export const metadata: Metadata = {

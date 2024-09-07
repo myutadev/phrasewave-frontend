@@ -5,6 +5,5 @@ export const getCSRFToken = async () => {
     )
 
     const data = await response.json()
-    console.log('data is', data)
     return data.token
 }

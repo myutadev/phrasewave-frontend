@@ -20,7 +20,7 @@ const PhraseCard = ({
     index,
     splitPhrase,
 }: PhraseCardProps) => {
-    const { isSaved, isLoading, error, toggleSave } = useSavePhrase({
+    const { isSaved, toggleSave } = useSavePhrase({
         user,
         selectedLanguage,
         phrases,

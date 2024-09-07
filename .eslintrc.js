@@ -1,6 +1,6 @@
 module.exports = {
     root: true,
-    parser: '@babel/eslint-parser',
+    parser: '@typescript-eslint/parser', // Babel の代わりに TypeScript パーサーを使用
     settings: {
         react: {
             version: 'detect',
@@ -15,6 +15,7 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:react/recommended',
+        'plugin:@typescript-eslint/recommended', // TypeScript の推奨設定を追加
         'plugin:@next/next/recommended',
         'prettier',
     ],
@@ -36,7 +37,10 @@ module.exports = {
         'no-unused-expressions': ['error', { allowTernary: true }],
         camelcase: 0,
         'react/self-closing-comp': 1,
-        'react/jsx-filename-extension': [1, { extensions: ['.js', 'jsx'] }],
+        'react/jsx-filename-extension': [
+            1,
+            { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+        ], // ts, tsx を追加
         'react/prop-types': 0,
         'react/destructuring-assignment': 0,
         'react/jsx-no-comment-textnodes': 0,
@@ -47,5 +51,7 @@ module.exports = {
         'react/react-in-jsx-scope': 0,
         'linebreak-style': ['error', 'unix'],
         semi: ['error', 'never'],
+        '@typescript-eslint/no-unused-vars': ['warn'], // TypeScript の未使用変数を警告
+        '@typescript-eslint/explicit-module-boundary-types': 'off', // 関数の戻り値型の強制をオフにする
     },
 }

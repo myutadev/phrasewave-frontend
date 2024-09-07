@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { formSchema } from '@/schemas/wordContextFormSchema'
-import { ApiResponse, Language, User } from '@/types/type'
+import { ApiResponse, Language } from '@/types/type'
 import {
     Select,
     SelectContent,
@@ -41,9 +41,12 @@ interface input {
     contextId: contextKeys
 }
 
-const GeneratePhraseForm = ({
-    languagesData,
-}: GeneratePhraseFormProps) => {
+interface AuthOptions {
+    middleware: string
+    redirectIfAuthenticated?: string
+}
+
+const GeneratePhraseForm = ({ languagesData }: GeneratePhraseFormProps) => {
     const inputs: input[] = [
         { id: 1, wordId: 'word1', contextId: 'context1' },
         { id: 2, wordId: 'word2', contextId: 'context2' },
@@ -73,8 +76,8 @@ const GeneratePhraseForm = ({
         reset()
         setResponse(null)
     }
-
-    const { user } = useAuth({ middleware: 'auth' })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { user } = useAuth({ middleware: 'auth' } as any)
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null)
@@ -102,7 +105,6 @@ const GeneratePhraseForm = ({
             if (!res.ok) throw new Error('Network response was not ok')
 
             const jsonres: ApiResponse[] = await res.json()
-            console.log('jsonres is', jsonres)
 
             setResponse(jsonres)
         } catch (error) {
