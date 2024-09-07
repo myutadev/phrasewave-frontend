@@ -31,7 +31,6 @@ export function useSavePhrase({
         setError(null)
 
         if (isSaved) {
-            console.log('check before del request', savedData)
             const delCsrfToken = await getCSRFToken()
             const delResponse = await fetch(
                 'http://localhost:8000/api/myphrases',
@@ -48,7 +47,6 @@ export function useSavePhrase({
             if (delResponse.ok) {
                 setIsSaved(false)
                 setSavedData(null)
-                console.log('savedData is', savedData)
                 return
             }
         }
@@ -78,10 +76,8 @@ export function useSavePhrase({
             if (response.ok) {
                 const responseObs = await response.json()
                 const savedIds = responseObs.data
-                console.log('savedIds is ', savedIds)
                 setIsSaved(prev => !prev)
                 setSavedData(savedIds)
-                console.log('savedData is', savedData)
             } else {
                 const errorData = await response.json()
                 throw new Error(errorData.message || 'Failed to save phrase')

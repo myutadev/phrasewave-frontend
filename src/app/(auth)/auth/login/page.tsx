@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { UserAuthLoginForm } from '../../components/user-auth-login-form'
-import LeftPanel from '../../components/leftPanel'
+import LeftPanel from '../../components/LeftPanel'
 
 export const metadata: Metadata = {
     title: 'Login',

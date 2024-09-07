@@ -3,7 +3,6 @@
 import * as React from 'react'
 
 import InputError from '@/components/InputError'
-import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -11,28 +10,29 @@ import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
+import { ErrorMessages } from '@/types/type'
 
 export function UserAuthLoginForm() {
     const router = useRouter()
 
     const { login } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
+        redirectIfAuthenticated: '/generate',
     })
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<ErrorMessages>([])
     const [status, setStatus] = useState(null)
 
-    useEffect(() => {
-        if (router.reset?.length > 0 && errors.length === 0) {
-            setStatus(atob(router.reset))
-        } else {
-            setStatus(null)
-        }
-    })
+    // useEffect(() => {
+    //     if (router.reset?.length > 0 && errors.length === 0) {
+    //         setStatus(atob(router.reset))
+    //     } else {
+    //         setStatus(null)
+    //     }
+    // })
 
     const submitForm = async event => {
         event.preventDefault()
@@ -55,7 +55,6 @@ export function UserAuthLoginForm() {
                     <Label className="font-bold text-base" htmlFor="email">
                         Email
                     </Label>
-
                     <Input
                         id="email"
                         type="email"
@@ -65,8 +64,10 @@ export function UserAuthLoginForm() {
                         required
                         autoFocus
                     />
-
-                    <InputError messages={errors.email} className="mt-2" />
+                    <InputError
+                        messages={(errors as { email?: string[] }).email}
+                        className="mt-2"
+                    />
                 </div>
 
                 {/* Password */}
@@ -93,7 +94,10 @@ export function UserAuthLoginForm() {
                         autoComplete="current-password"
                     />
 
-                    <InputError messages={errors.password} className="mt-2" />
+                    <InputError
+                        messages={(errors as { password?: string[] }).password}
+                        className="mt-2"
+                    />
                 </div>
 
                 {/* Remember Me */}

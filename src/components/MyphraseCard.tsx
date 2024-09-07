@@ -2,8 +2,8 @@ import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 const MyphraseCard = ({ word, index, phrases }) => {
-    console.log(phrases)
-    console.log(typeof phrases)
+    // console.log(phrases)
+    // console.log(typeof phrases)
     return (
         <Card className="my-5">
             <CardHeader>

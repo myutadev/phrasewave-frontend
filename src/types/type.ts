@@ -24,3 +24,11 @@ export interface MyphraseResponseData {
 export interface MyphraseResponse {
     data: MyphraseResponseData[]
 }
+
+export type ErrorMessages =
+    | []
+    | {
+          email?: string[] | string
+          password?: string[] | string
+          [key: string]: string[] | string
+      }

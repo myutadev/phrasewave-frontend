@@ -1,5 +1,4 @@
 import { Language } from '@/types/type'
-import React from 'react'
 import GeneratePhraseForm from '@/components/GeneratePhraseForm'
 
 const getAllLanguageData = async () => {
