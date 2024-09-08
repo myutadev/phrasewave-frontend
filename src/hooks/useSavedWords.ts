@@ -14,7 +14,7 @@ export const useSavedWords = () => {
                 // const cookieStore = cookies()
                 // const csrfToken = await getCSRFToken()
                 const response = await fetch(
-                    'http://localhost:8000/api/myphrases',
+                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/myphrases`,
                     {
                         method: 'GET',
                         headers: {

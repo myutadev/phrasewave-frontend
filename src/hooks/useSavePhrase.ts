@@ -33,7 +33,7 @@ export function useSavePhrase({
         if (isSaved) {
             const delCsrfToken = await getCSRFToken()
             const delResponse = await fetch(
-                'http://localhost:8000/api/myphrases',
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/myphrases`,
                 {
                     method: 'DELETE',
                     headers: {
@@ -61,7 +61,7 @@ export function useSavePhrase({
         try {
             const csrfToken = await getCSRFToken()
             const response = await fetch(
-                'http://localhost:8000/api/myphrases',
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/myphrases`,
                 {
                     method: 'POST',
                     headers: {
