@@ -17,7 +17,7 @@ const MyphraseCard = ({ word, index, phrases }) => {
                     <div
                         className="flex justify-between space-x-8 mb-3"
                         key={idx}>
-                        <div className="grid w-9/12 ">
+                        <div className="md:grid md:w-9/12 ">
                             <div>
                                 {' '}
                                 {phrase.map((part, partIndex) =>
@@ -32,7 +32,7 @@ const MyphraseCard = ({ word, index, phrases }) => {
                                 )}
                             </div>
                         </div>
-                        <div className="grid w-3/12 "></div>
+                        <div className="md:grid md:w-3/12 "></div>
                     </div>
                 ))}
             </CardContent>
