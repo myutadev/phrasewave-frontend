@@ -12,7 +12,7 @@ const AppLayout = ({ children }) => {
     }
 
     return (
-        <div className="container mx-auto">
+        <div className="md:container md:mx-auto max-w-md mx-auto px-4 py-8 md:max-w-none md:px-0 md:py-0">
             <Header />
             {children}
         </div>

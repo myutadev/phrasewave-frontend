@@ -120,9 +120,9 @@ const GeneratePhraseForm = ({ languagesData }: GeneratePhraseFormProps) => {
     return (
         <div>
             <Form {...form} reset={reset}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="mb-3">
+                <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div>
-                        <div className="flex items-baseline mb-3">
+                        <div className="flex items-baseline">
                             <p className="text-base">Language:</p>
                             <FormField
                                 control={form.control}
@@ -173,8 +173,8 @@ const GeneratePhraseForm = ({ languagesData }: GeneratePhraseFormProps) => {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="flex justify-between space-x-8 mb-2">
-                                    <div className="grid w-4/12 items-center ">
+                                <div className="md:flex md:justify-between md:space-x-8 space-y-4 md:space-y-0">
+                                    <div className="w-full md:w-4/12 items-center">
                                         <div className="flex flex-col space-y-1 ">
                                             <FormField
                                                 key={item.id}
