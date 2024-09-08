@@ -1,91 +1,68 @@
-# Laravel Breeze - Next.js Edition ▲
+# Phrase Wave フロントエンド
 
-## Introduction
+## アプリケーション概要
+Phrase Waveは、言語学習者のためのWebアプリケーションです。ユーザーが覚えたい単語を組み合わせて、自分に合った例文を生成することができます。
 
-This repository is an implementation of the [Laravel Breeze](https://laravel.com/docs/starter-kits) application / authentication starter kit frontend in [Next.js](https://nextjs.org). All of the authentication boilerplate is already written for you - powered by [Laravel Sanctum](https://laravel.com/docs/sanctum), allowing you to quickly begin pairing your beautiful Next.js frontend with a powerful Laravel backend.
+URL: https://phrasewave.com/
 
-## Official Documentation
+## 開発背景
+開発者自身の語学学習経験から生まれたアイデアです。新出単語を組み合わせて例文を作成し覚えるという学習方法を、生成系AIを活用してより効率的に行えるようにすることを目指しました。
 
-### Installation
 
-First, create a Next.js compatible Laravel backend by installing Laravel Breeze into a [fresh Laravel application](https://laravel.com/docs/installation) and installing Breeze's API scaffolding:
+## 主要機能
+- カスタム例文生成：ユーザーが選択した単語を使用して、AIが例文を生成
+- マイフレーズ保存：生成された例文をユーザーごとに保存可能
+- レスポンシブデザイン：様々なデバイスでの利用に対応
 
-```bash
-# Create the Laravel application...
-laravel new next-backend
+## サービス画面･機能の説明
+### ログイン･登録画面
+|ログイン|サインアップ|
+|----|----|
+|![ログイン](/docs/images/phrasewave-login.png)|![サインアップ](/docs/images/phrasewave-signup.png)|
+|ログイン直後の画面です。現在の日次と各ボタンが表示されます。|事業所では出勤時に体温の記録を行っているため、体温を記録しています。|
 
-cd next-backend
+### generateページ
+|単語入力|生成された例文表示|
+|----|----|
+|![単語入力](/docs/images/phrasewave-generate-input.png)|![生成された例文表示](/docs/images/phrasewave-generate-generated.png)|
+|退勤時には作業内容とコメントを入力します。昼休憩の自動入力や、15:30を過ぎて打刻をすると残業の有無を聞くポップアップが現れる等、事業所特有のルールを適応させています。|タイムカード画面で月ごとの出席情報が把握できます。|
 
-# Install Breeze and dependencies...
-composer require laravel/breeze --dev
+<br />
 
-php artisan breeze:install api
+### Myphrasesページ
+|保存した単語･フレーズの表示||
+|----|----|
+|![タイムカード](/docs/images/phrasewave-myphrases.png)||
+|保存したフレーズを単語ごとに見ることができます。||
 
-# Run database migrations...
-php artisan migrate
-```
+## 技術スタック
+- フレームワーク: Next.js (v14.2.3)
+- 言語: TypeScript
+- スタイリング: Tailwind CSS (v3.4.3)
+- コンポーネントライブラリ: shadcn/ui
+- フォーム管理: React Hook Form (v7.52.1)
+- APIクライアント: Axios (v0.21.1)
+- バリデーション: Zod (v3.23.8)
+- UIコンポーネント:
+  - Headless UI (v1.4.2)
+  - Radix UI
+- アイコン: Lucide React (v0.414.0)
+- ローディングインジケータ: React Spinners (v0.14.1)
 
-Next, ensure that your application's `APP_URL` and `FRONTEND_URL` environment variables are set to `http://localhost:8000` and `http://localhost:3000`, respectively.
+## デプロイメント
+- AWS Amplifyを使用してデプロイ
+- ドメイン管理にはAWS Route 53を使用
 
-After defining the appropriate environment variables, you may serve the Laravel application using the `serve` Artisan command:
 
-```bash
-# Serve the application...
-php artisan serve
-```
+## 今後の開発予定
+- Myphraseの削除機能
+- アカウントの削除機能
+- 単語帳機能
+- 例文音声読み上げ機能
+- 例文、単語翻訳機能
+- ユーザープロフィールに基づいたカスタム例文生成機能
 
-Next, clone this repository and install its dependencies with `yarn install` or `npm install`. Then, copy the `.env.example` file to `.env.local` and supply the URL of your backend:
 
-```
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-```
-
-Finally, run the application via `npm run dev`. The application will be available at `http://localhost:3000`:
-
-```
-npm run dev
-```
-
-> Note: Currently, we recommend using `localhost` during local development of your backend and frontend to avoid CORS "Same-Origin" issues.
-
-### Authentication Hook
-
-This Next.js application contains a custom `useAuth` React hook, designed to abstract all authentication logic away from your pages. In addition, the hook can be used to access the currently authenticated user:
-
-```js
-const ExamplePage = () => {
-    const { logout, user } = useAuth({ middleware: 'auth' })
-
-    return (
-        <>
-            <p>{user?.name}</p>
-
-            <button onClick={logout}>Sign out</button>
-        </>
-    )
-}
-
-export default ExamplePage
-```
-
-> Note: You will need to use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`user?.name` instead of `user.name`) when accessing properties on the user object to account for Next.js's initial server-side render.
-
-### Named Routes
-
-For convenience, [Ziggy](https://github.com/tighten/ziggy#spas-or-separate-repos) may be used to reference your Laravel application's named route URLs from your React application.
-
-## Contributing
-
-Thank you for considering contributing to Breeze Next! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-Please review [our security policy](https://github.com/laravel/breeze-next/security/policy) on how to report security vulnerabilities.
-
-## License
-
-Laravel Breeze Next is open-sourced software licensed under the [MIT license](LICENSE.md).
+## ライセンス
+本プロジェクトは、ポートフォリオとしての閲覧および評価目的でのみ公開されています。
+複製、再配布、または商業利用は許可されていません。詳細は[LICENSE.md](LICENSE.md)ファイルをご覧ください。
