@@ -4,8 +4,6 @@ import MyphraseCards from '@/components/MyphraseCards'
 import { MyphraseResponse } from '@/types/type'
 import React, { useEffect, useState } from 'react'
 
-
-
 const page = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [wordPhrases, setWordPhrases] = useState<MyphraseResponse>(null)
@@ -15,7 +13,7 @@ const page = () => {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:8000/api/myphrases`,
+                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/myphrases`,
                     {
                         method: 'GET',
                         headers: {

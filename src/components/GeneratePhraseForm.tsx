@@ -92,15 +92,18 @@ const GeneratePhraseForm = ({ languagesData }: GeneratePhraseFormProps) => {
             setError(null)
             setResponse(null)
             const csrfToken = await getCSRFToken()
-            const res = await fetch('http://localhost:8000/api/generate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken,
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/generate`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(value),
                 },
-                credentials: 'include',
-                body: JSON.stringify(value),
-            })
+            )
 
             if (!res.ok) throw new Error('Network response was not ok')
 
