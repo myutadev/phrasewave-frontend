@@ -1,4 +1,4 @@
-import {  Poppins } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import '@/app/global.css'
 
 const poppingsFont = Poppins({
@@ -10,9 +10,7 @@ const poppingsFont = Poppins({
 const RootLayout = ({ children }) => {
     return (
         <html lang="en" className={poppingsFont.className}>
-            <body className="antialiased">
-                    {children}
-            </body>
+            <body className="antialiased">{children}</body>
         </html>
     )
 }
@@ -21,6 +19,9 @@ export const metadata = {
     title: 'PhraseWave',
     description:
         'PhraseWave is a web application where you can create your own example sentence to learn new words for language learners',
+    icons: {
+        icon: '/favicon.ico',
+    },
 }
 
 export default RootLayout
