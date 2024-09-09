@@ -5,6 +5,17 @@ Phrase Waveは、言語学習者のためのWebアプリケーションです。
 
 URL: https://phrasewave.com/
 
+※現バージョンでは単純に入力した単語を組み合わせて例文を生成し、保存をすることしかできませんが、今後のバージョンではユーザーのプロフィールに合わせた例文の生成、過去に学んだ単語が復習できるように、新たな例文生成時に組み込むことができるように機能を追加していきます。
+
+## デモアカウント
+アプリケーションをすぐに試していただけるよう、以下のデモアカウントをご用意しています：
+
+- メールアドレス: demo@phrasewave.com
+- パスワード: demoPass123
+
+※このアカウントは定期的にリセットされます。個人情報の入力はお控えください。
+
+
 ## 開発背景
 開発者自身の語学学習経験から生まれたアイデアです。新出単語を組み合わせて例文を作成し覚えるという学習方法を、生成系AIを活用してより効率的に行えるようにすることを目指しました。
 
@@ -12,20 +23,20 @@ URL: https://phrasewave.com/
 ## 主要機能
 - カスタム例文生成：ユーザーが選択した単語を使用して、AIが例文を生成
 - マイフレーズ保存：生成された例文をユーザーごとに保存可能
-- レスポンシブデザイン：様々なデバイスでの利用に対応
 
 ## サービス画面･機能の説明
+
 ### ログイン･登録画面
 |ログイン|サインアップ|
 |----|----|
 |![ログイン](/docs/images/phrasewave-login.png)|![サインアップ](/docs/images/phrasewave-signup.png)|
-|ログイン直後の画面です。現在の日次と各ボタンが表示されます。|事業所では出勤時に体温の記録を行っているため、体温を記録しています。|
+|Laravel Breeze Next.jsを使って実装||
 
 ### generateページ
 |単語入力|生成された例文表示|
 |----|----|
 |![単語入力](/docs/images/phrasewave-generate-input.png)|![生成された例文表示](/docs/images/phrasewave-generate-generated.png)|
-|退勤時には作業内容とコメントを入力します。昼休憩の自動入力や、15:30を過ぎて打刻をすると残業の有無を聞くポップアップが現れる等、事業所特有のルールを適応させています。|タイムカード画面で月ごとの出席情報が把握できます。|
+|学び単語を入力します。左側が単語･熟語、右側にその表現が利用される文脈です。|Generate Your Phrasesボタンを押すとOpen AI APIにリクエストがされて生成AIが作った例文が返されます。Saveボタンを押すとMyphrasesに単語とフレーズが保存されます。|
 
 <br />
 
@@ -35,13 +46,18 @@ URL: https://phrasewave.com/
 |![タイムカード](/docs/images/phrasewave-myphrases.png)||
 |保存したフレーズを単語ごとに見ることができます。||
 
+## サーバー構成
+![AWS構成図](/docs/images/phrasewave-aws.png)
+
+
 ## 技術スタック
+
+### フロントエンド
 - フレームワーク: Next.js (v14.2.3)
 - 言語: TypeScript
 - スタイリング: Tailwind CSS (v3.4.3)
 - コンポーネントライブラリ: shadcn/ui
 - フォーム管理: React Hook Form (v7.52.1)
-- APIクライアント: Axios (v0.21.1)
 - バリデーション: Zod (v3.23.8)
 - UIコンポーネント:
   - Headless UI (v1.4.2)
@@ -49,10 +65,27 @@ URL: https://phrasewave.com/
 - アイコン: Lucide React (v0.414.0)
 - ローディングインジケータ: React Spinners (v0.14.1)
 
+
+### バックエンド
+- 言語: PHP 8.2+
+- フレームワーク: Laravel 11.x
+- AI 統合: OpenAI PHP SDK for Laravel (openai-php/laravel ^0.10.1)
+
+
+### インフラストラクチャ
+- クラウドプラットフォーム: AWS (Amazon Web Services)
+- フロントエンドホスティング: AWS Amplify
+- コンテナ化: Docker
+- データベース: Amazon RDS
+- 仮想プライベートクラウド (VPC)
+  - パブリックサブネット
+  - プライベートサブネット
+- ロードバランシング: Elastic Load Balancer (ELB)
+- コンピューティング: Amazon EC2
+- ドメイン管理・DNS: Amazon Route 53
+
 ## デプロイメント
 - AWS Amplifyを使用してデプロイ
-- ドメイン管理にはAWS Route 53を使用
-
 
 ## 今後の開発予定
 - Myphraseの削除機能
