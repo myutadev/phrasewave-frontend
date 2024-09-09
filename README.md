@@ -59,11 +59,6 @@ URL: https://phrasewave.com/
 - コンポーネントライブラリ: shadcn/ui
 - フォーム管理: React Hook Form (v7.52.1)
 - バリデーション: Zod (v3.23.8)
-- UIコンポーネント:
-  - Headless UI (v1.4.2)
-  - Radix UI
-- アイコン: Lucide React (v0.414.0)
-- ローディングインジケータ: React Spinners (v0.14.1)
 
 
 ### バックエンド
