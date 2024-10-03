@@ -44,9 +44,15 @@ const MyphraseCards = ({ wordPhrases }: MyphraseCardsProps) => {
     const processedWordPhrases = filteredByLanguage.map(wordObj => {
         const key = Object.keys(wordObj)[0]
 
-        const newVals = wordObj[key]['phrases'].map(value => {
+        const phrases = wordObj[key]['phrases'].map(value => {
             return splitPhraseByWords([key], value)
         })
+
+        const newVals = {
+            wordId: wordObj[key]['wordId'],
+            phraseIds: wordObj[key]['phraseIds'],
+            phrases: phrases,
+        }
         const newObj = { [key]: newVals }
         return newObj
     })
@@ -91,10 +97,12 @@ const MyphraseCards = ({ wordPhrases }: MyphraseCardsProps) => {
                 <div>
                     {processedWordPhrases.map((wordObj, index) => (
                         <MyphraseCard
-                            phrases={Object.values(wordObj)[0]}
+                            phrases={Object.values(wordObj)[0]['phrases']}
                             index={index}
                             word={Object.keys(wordObj)[0]}
                             key={index}
+                            word_id={Object.values(wordObj)[0]['wordId']}
+                            phraseIds={Object.values(wordObj)[0]['phraseIds']}
                         />
                     ))}
                 </div>
