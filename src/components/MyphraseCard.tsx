@@ -5,21 +5,18 @@ import { Trash2 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 import { ToastAction } from '@/components/ui/toast'
-import { Toaster } from '@/components/ui/toaster'
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useDeleteSavedWord } from '@/hooks/useDeleteSavedWord'
+import { useWordManagement } from '@/hooks/useWordManagement'
 
 const MyphraseCard = ({ word, index, phrases, word_id, phraseIds }) => {
-    // console.log(phrases)
-    // console.log(typeof phrases)
     const { toast } = useToast()
-    const { isDeleted, isLoading, error, deletedWordId, deleteWord } =
-        useDeleteSavedWord({ word_id, phraseIds })
+    const { isDeleted, isLoading, error, deletedWordId, deleteWord, restore } =
+        useWordManagement({ word_id, phraseIds })
     console.log('isDeleted is', isDeleted)
     return (
         <Card className="my-5">
@@ -39,10 +36,14 @@ const MyphraseCard = ({ word, index, phrases, word_id, phraseIds }) => {
                                         deleteWord()
                                         toast({
                                             title: `${word} has been deleted`,
-                                            description:
-                                                'Undo the action if it was deleted by mistake',
+                                            // description:
+                                            //     'If this was a mistake, you can undo the action.',
                                             action: (
-                                                <ToastAction altText="Undo Delete">
+                                                <ToastAction
+                                                    altText="Undo Delete"
+                                                    onClick={() => {
+                                                        restore()
+                                                    }}>
                                                     Undo Delete
                                                 </ToastAction>
                                             ),
@@ -81,7 +82,6 @@ const MyphraseCard = ({ word, index, phrases, word_id, phraseIds }) => {
                         <div className="md:grid md:w-3/12 "></div>
                     </div>
                 ))}
-                <Toaster />
             </CardContent>
         </Card>
     )

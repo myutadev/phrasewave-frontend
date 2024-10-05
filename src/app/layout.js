@@ -1,5 +1,6 @@
 import { Poppins } from 'next/font/google'
 import '@/app/global.css'
+import { Toaster } from '@/components/ui/toaster'
 
 const poppingsFont = Poppins({
     subsets: ['latin'],
@@ -10,7 +11,10 @@ const poppingsFont = Poppins({
 const RootLayout = ({ children }) => {
     return (
         <html lang="en" className={poppingsFont.className}>
-            <body className="antialiased">{children}</body>
+            <body className="antialiased">
+                {children}
+                <Toaster />
+            </body>
         </html>
     )
 }
