@@ -194,7 +194,7 @@ const GeneratePhraseForm = ({ languagesData }: GeneratePhraseFormProps) => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="grid w-8/12 items-center ">
+                                    <div className="grid md:w-8/12 items-center ">
                                         <div className="flex flex-col space-y-1.5">
                                             <FormField
                                                 key={item.id}

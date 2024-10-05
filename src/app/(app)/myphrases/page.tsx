@@ -47,7 +47,11 @@ const page = () => {
         <div className="mx-5 my-5">
             <div className="font-semibold text-xl">My Phrases</div>
             <div className="pt-5">
-                <MyphraseCards wordPhrases={wordPhrases.data} />
+                {wordPhrases.data.length == 0 ? (
+                    'You have no saved words yet.'
+                ) : (
+                    <MyphraseCards wordPhrases={wordPhrases.data} />
+                )}
             </div>
         </div>
     )

@@ -36,8 +36,8 @@ const PhraseCard = ({
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="flex justify-between space-x-8 mb-3">
-                    <div className="grid w-9/12 ">
+                <div className="md:flex md:justify-between md:space-x-8 md:mb-3">
+                    <div className="md:grid md:w-9/12 ">
                         <div>
                             {splitPhrase.map((part, partIndex) =>
                                 phrases[index].usedWords.some(word =>
@@ -54,8 +54,9 @@ const PhraseCard = ({
                             )}
                         </div>
                     </div>
-                    <div className="grid w-3/12 ">
+                    <div className="w-full md:grid md:w-3/12 mt-3">
                         <Button
+                            className="w-full md:w-auto"
                             key={`save-button-${index}`}
                             onClick={() => toggleSave()}
                             variant={isSaved ? 'outline' : 'default'}>

@@ -23,6 +23,9 @@ export const metadata = {
     title: 'PhraseWave',
     description:
         'PhraseWave is a web application where you can create your own example sentence to learn new words for language learners',
+    icons: {
+        icon: '/favicon.ico',
+    },
 }
 
 export default RootLayout

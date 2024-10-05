@@ -1,21 +1,15 @@
-The MIT License (MIT)
+Copyright (c) Yuta Matsubara 2024
 
-Copyright (c) Taylor Otwell
+本ソフトウェアおよび関連文書ファイル（以下「ソフトウェア」）の複製を取得するすべての人に対し、
+以下の条件に従い、ソフトウェアを無償で閲覧する権利を許可します：
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. 本ソフトウェアは、ポートフォリオとしての閲覧および評価目的でのみ使用を許可します。
+2. 本ソフトウェアの複製、変更、結合、公開、配布、サブライセンス、販売は明示的に禁止されています。
+3. 本ソフトウェアの使用、その他の取引において生じる一切の請求、損害、その他の義務について、
+   作者または著作権者は一切責任を負いません。
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+上記の著作権表示および本許可表示を、ソフトウェアのすべての複製または重要な部分に記載するものとします。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+本ソフトウェアは現状有姿で提供され、明示または黙示を問わず、
+商品性、特定目的への適合性、および非侵害の保証を含むがこれに限定されない、
+いかなる種類の保証もありません。

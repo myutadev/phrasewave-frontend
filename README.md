@@ -1,91 +1,96 @@
-# Laravel Breeze - Next.js Edition ▲
+# Phrase Wave フロントエンド
 
-## Introduction
+## アプリケーション概要
+Phrase Waveは、言語学習者のためのWebアプリケーションです。ユーザーが覚えたい単語を組み合わせて、自分に合った例文を生成することができます。
 
-This repository is an implementation of the [Laravel Breeze](https://laravel.com/docs/starter-kits) application / authentication starter kit frontend in [Next.js](https://nextjs.org). All of the authentication boilerplate is already written for you - powered by [Laravel Sanctum](https://laravel.com/docs/sanctum), allowing you to quickly begin pairing your beautiful Next.js frontend with a powerful Laravel backend.
+URL: https://phrasewave.com/
 
-## Official Documentation
+※現バージョンでは単純に入力した単語を組み合わせて例文を生成し、保存をすることしかできませんが、今後のバージョンではユーザーのプロフィールに合わせた例文の生成、過去に学んだ単語が復習できるように、新たな例文生成時に組み込むことができるように機能を追加していきます。
 
-### Installation
+## デモアカウント
+アプリケーションをすぐに試していただけるよう、以下のデモアカウントをご用意しています：
 
-First, create a Next.js compatible Laravel backend by installing Laravel Breeze into a [fresh Laravel application](https://laravel.com/docs/installation) and installing Breeze's API scaffolding:
+- メールアドレス: demo@phrasewave.com
+- パスワード: demoPass123
 
-```bash
-# Create the Laravel application...
-laravel new next-backend
+※このアカウントは定期的にリセットされます。個人情報の入力はお控えください。
 
-cd next-backend
 
-# Install Breeze and dependencies...
-composer require laravel/breeze --dev
+## 開発背景
+開発者自身の語学学習経験から生まれたアイデアです。新出単語を組み合わせて例文を作成し覚えるという学習方法を、生成系AIを活用してより効率的に行えるようにすることを目指しました。
 
-php artisan breeze:install api
 
-# Run database migrations...
-php artisan migrate
-```
+## 主要機能
+- カスタム例文生成：ユーザーが選択した単語を使用して、AIが例文を生成
+- マイフレーズ保存：生成された例文をユーザーごとに保存可能
 
-Next, ensure that your application's `APP_URL` and `FRONTEND_URL` environment variables are set to `http://localhost:8000` and `http://localhost:3000`, respectively.
+## サービス画面･機能の説明
 
-After defining the appropriate environment variables, you may serve the Laravel application using the `serve` Artisan command:
+### ログイン･登録画面
+|ログイン|サインアップ|
+|----|----|
+|![ログイン](/docs/images/phrasewave-login.png)|![サインアップ](/docs/images/phrasewave-signup.png)|
+|Laravel Breeze Next.jsを使って実装||
 
-```bash
-# Serve the application...
-php artisan serve
-```
+### generateページ
+|単語入力|生成された例文表示|
+|----|----|
+|![単語入力](/docs/images/phrasewave-generate-input.png)|![生成された例文表示](/docs/images/phrasewave-generate-generated.png)|
+|学び単語を入力します。左側が単語･熟語、右側にその表現が利用される文脈です。|Generate Your Phrasesボタンを押すとOpen AI APIにリクエストがされて生成AIが作った例文が返されます。Saveボタンを押すとMyphrasesに単語とフレーズが保存されます。|
 
-Next, clone this repository and install its dependencies with `yarn install` or `npm install`. Then, copy the `.env.example` file to `.env.local` and supply the URL of your backend:
+<br />
 
-```
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-```
+### Myphrasesページ
+|保存した単語･フレーズの表示||
+|----|----|
+|![タイムカード](/docs/images/phrasewave-myphrases.png)||
+|保存したフレーズを単語ごとに見ることができます。||
 
-Finally, run the application via `npm run dev`. The application will be available at `http://localhost:3000`:
+## サーバー構成
+![AWS構成図](/docs/images/phrasewave-aws.png)
 
-```
-npm run dev
-```
 
-> Note: Currently, we recommend using `localhost` during local development of your backend and frontend to avoid CORS "Same-Origin" issues.
+## 技術スタック
 
-### Authentication Hook
+### フロントエンド
+- フレームワーク: Next.js (v14.2.3)
+- 言語: TypeScript
+- スタイリング: Tailwind CSS (v3.4.3)
+- コンポーネントライブラリ: shadcn/ui
+- フォーム管理: React Hook Form (v7.52.1)
+- バリデーション: Zod (v3.23.8)
 
-This Next.js application contains a custom `useAuth` React hook, designed to abstract all authentication logic away from your pages. In addition, the hook can be used to access the currently authenticated user:
 
-```js
-const ExamplePage = () => {
-    const { logout, user } = useAuth({ middleware: 'auth' })
+### バックエンド
+- 言語: PHP 8.2+
+- フレームワーク: Laravel 11.x
+- AI 統合: OpenAI PHP SDK for Laravel (openai-php/laravel ^0.10.1)
 
-    return (
-        <>
-            <p>{user?.name}</p>
 
-            <button onClick={logout}>Sign out</button>
-        </>
-    )
-}
+### インフラストラクチャ
+- クラウドプラットフォーム: AWS (Amazon Web Services)
+- フロントエンドホスティング: AWS Amplify
+- コンテナ化: Docker
+- データベース: Amazon RDS
+- 仮想プライベートクラウド (VPC)
+  - パブリックサブネット
+  - プライベートサブネット
+- ロードバランシング: Elastic Load Balancer (ELB)
+- コンピューティング: Amazon EC2
+- ドメイン管理・DNS: Amazon Route 53
 
-export default ExamplePage
-```
+## デプロイメント
+- AWS Amplifyを使用してデプロイ
 
-> Note: You will need to use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`user?.name` instead of `user.name`) when accessing properties on the user object to account for Next.js's initial server-side render.
+## 今後の開発予定
+- Myphraseの削除機能
+- アカウントの削除機能
+- 単語帳機能
+- 例文音声読み上げ機能
+- 例文、単語翻訳機能
+- ユーザープロフィールに基づいたカスタム例文生成機能
 
-### Named Routes
 
-For convenience, [Ziggy](https://github.com/tighten/ziggy#spas-or-separate-repos) may be used to reference your Laravel application's named route URLs from your React application.
-
-## Contributing
-
-Thank you for considering contributing to Breeze Next! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-Please review [our security policy](https://github.com/laravel/breeze-next/security/policy) on how to report security vulnerabilities.
-
-## License
-
-Laravel Breeze Next is open-sourced software licensed under the [MIT license](LICENSE.md).
+## ライセンス
+本プロジェクトは、ポートフォリオとしての閲覧および評価目的でのみ公開されています。
+複製、再配布、または商業利用は許可されていません。詳細は[LICENSE.md](LICENSE.md)ファイルをご覧ください。
