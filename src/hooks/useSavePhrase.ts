@@ -62,7 +62,7 @@ export function useSavePhrase({
             const csrfToken = await getCSRFToken()
             const response = await fetch(
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/myphrases`,
-                {
+                {   
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

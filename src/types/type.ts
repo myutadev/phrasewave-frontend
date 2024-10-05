@@ -16,6 +16,8 @@ export interface User {
 
 export interface MyphraseResponseData {
     [key: string]: {
+        wordId: number
+        phraseIds: number[]
         phrases: string[]
         language: string
     }
