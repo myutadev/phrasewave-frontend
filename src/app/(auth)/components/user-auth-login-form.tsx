@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { ErrorMessages } from '@/types/type'
+import Link from 'next/link'
 
 export function UserAuthLoginForm() {
     const router = useRouter()
@@ -78,11 +79,6 @@ export function UserAuthLoginForm() {
                             htmlFor="password">
                             Password
                         </Label>
-                        {/* <Link
-                            href="/auth/forgot-password"
-                            className="underline text-sm text-gray-600 hover:text-gray-900">
-                            Forgot?
-                        </Link> */}
                     </div>
                     <Input
                         id="password"
@@ -101,7 +97,7 @@ export function UserAuthLoginForm() {
                 </div>
 
                 {/* Remember Me */}
-                <div className="block mt-4">
+                <div className="mt-4 flex justify-between">
                     <label
                         htmlFor="remember_me"
                         className="inline-flex items-center">
@@ -119,6 +115,11 @@ export function UserAuthLoginForm() {
                             Remember me
                         </span>
                     </label>
+                    <Link
+                        href="/auth/forgot-password"
+                        className="underline text-sm text-gray-600 hover:text-gray-900">
+                        Forgot?
+                    </Link>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">

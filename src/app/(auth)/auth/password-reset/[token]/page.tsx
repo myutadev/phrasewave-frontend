@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
-import LeftPanel from '../../components/LeftPanel'
-import { UserAuthForgotPasswordForm } from '../../components/user-auth-forgot-password-form'
+import LeftPanel from '../../../components/LeftPanel'
+import { UserAuthResetPasswordForm } from '@/app/(auth)/components/user-auth-reset-password-form'
 
 export const metadata: Metadata = {
     title: 'Forgot password',
@@ -36,7 +36,7 @@ export default function AuthenticationPage() {
                                 Forgot Password?
                             </h1>
                         </div>
-                        <UserAuthForgotPasswordForm />
+                        <UserAuthResetPasswordForm />
                     </div>
                 </div>
             </div>
