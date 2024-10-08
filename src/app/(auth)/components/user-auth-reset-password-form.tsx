@@ -13,8 +13,10 @@ import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
 export function UserAuthResetPasswordForm() {
     const searchParams = useSearchParams()
 
-    const { resetPassword } = useAuth({ middleware: 'guest' })
-
+    const { resetPassword } = useAuth({
+        middleware: 'guest',
+        redirectIfAuthenticated: '/generate',
+    })
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -56,8 +58,10 @@ export function UserAuthResetPasswordForm() {
                         required
                         autoFocus
                     />
-
-                    <InputError messages={errors.email} className="mt-2" />
+                    <InputError
+                        messages={(errors as { email?: string[] }).email}
+                        className="mt-2"
+                    />{' '}
                 </div>
 
                 {/* Password */}
@@ -74,7 +78,10 @@ export function UserAuthResetPasswordForm() {
                         required
                     />
 
-                    <InputError messages={errors.password} className="mt-2" />
+                    <InputError
+                        messages={(errors as { password?: string[] }).password}
+                        className="mt-2"
+                    />
                 </div>
 
                 {/* Confirm Password */}
@@ -97,7 +104,10 @@ export function UserAuthResetPasswordForm() {
                     />
 
                     <InputError
-                        messages={errors.password_confirmation}
+                        messages={
+                            (errors as { password_confirmation?: string[] })
+                                .password_confirmation
+                        }
                         className="mt-2"
                     />
                 </div>

@@ -51,7 +51,10 @@ export function UserAuthForgotPasswordForm() {
                         autoFocus
                     />
 
-                    <InputError messages={errors.email} className="mt-2" />
+                    <InputError
+                        messages={(errors as { email?: string[] }).email}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div className="mt-4">
