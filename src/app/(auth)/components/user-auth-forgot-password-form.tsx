@@ -27,7 +27,6 @@ export function UserAuthForgotPasswordForm() {
     return (
         <div className="grid gap-6">
             <AuthSessionStatus className="mb-4" status={status} />
-
             <form onSubmit={submitForm}>
                 {/* Email Address */}
                 <div>
@@ -57,7 +56,7 @@ export function UserAuthForgotPasswordForm() {
                     />
                 </div>
 
-                <div className="mt-4">
+                <div className="flex items-center justify-end mt-4">
                     <Button className="rounded-xl w-full">
                         Email Password Reset Link
                     </Button>
